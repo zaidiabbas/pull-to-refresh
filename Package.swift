@@ -1,4 +1,4 @@
-// swift-tools-version:5.0
+// swift-tools-version:5.2
 //
 //  Package.swift
 //
@@ -37,6 +37,6 @@ let package = Package(
         .target(
             name: "ESPullToRefresh",
             dependencies: [],
-            path: "./Sources")
+            path: "Sources")
     ]
 )
