@@ -45,21 +45,21 @@ open class ESRefreshHeaderAnimator: UIView, ESRefreshProtocol, ESRefreshAnimator
     open var executeIncremental: CGFloat = 60.0
     open var state: ESRefreshViewState = .pullToRefresh
 
-    open var tintColor: UIColor!{
+    open override var tintColor: UIColor!{
         set{
-            tintColor = tintColor
+            self.tintColor = tintColor
         }
         get{
-            return tintColor
+            return self.tintColor
         }
     }
     
     open var font: UIFont{
         set{
-            font = font
+            self.font = font
         }
         get{
-            return font
+            self.return font
         }
     }
     
