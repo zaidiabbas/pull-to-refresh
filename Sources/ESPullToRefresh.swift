@@ -121,7 +121,7 @@ public extension ES where Base: UIScrollView {
         }
     }
     
-    func setAppStyle(TintColor color: UIColor?, Font font: UIFont?){
+    mutating func setAppStyle(TintColor color: UIColor?, Font font: UIFont?){
         self.font = font
         self.fontColor = color
     }
