@@ -74,9 +74,9 @@ open class ESRefreshHeaderAnimator: UIView, ESRefreshProtocol, ESRefreshAnimator
         return indicatorView
     }()
     
-    public func setAppStyle(TintColor color: UIColor, Font font: UIFont){
-        titleLabel.font = font
-        titleLabel.textColor = color
+    public func setAppStyle(TintColor color: UIColor?, Font font: UIFont?){
+        titleLabel.font = font ?? UIFont.systemFont(ofSize: 14.0)
+        titleLabel.textColor = color ?? UIColor.init(white: 0.625, alpha: 1.0)
     }
     
     public override init(frame: CGRect) {

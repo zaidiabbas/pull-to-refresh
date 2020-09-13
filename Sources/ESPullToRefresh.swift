@@ -49,7 +49,8 @@ public extension ES where Base: UIScrollView {
     @discardableResult
     func addPullToRefresh(handler: @escaping ESRefreshHandler) -> ESRefreshHeaderView {
         removeRefreshHeader()
-        let header = ESRefreshHeaderView(frame: CGRect.zero, handler: handler)
+        let header = ESRefreshHeaderView.init(frame: .zero, color: fontColor, font: font, handler: handler)
+        //(frame: CGRect.zero, handler: handler)
         let headerH = header.animator.executeIncremental
         header.frame = CGRect.init(x: 0.0, y: -headerH /* - contentInset.top */, width: self.base.bounds.size.width, height: headerH)
         self.base.addSubview(header)
@@ -202,10 +203,18 @@ open class ESRefreshHeaderView: ESRefreshComponent {
     open var lastRefreshTimestamp: TimeInterval?
     open var refreshIdentifier: String?
     
-    public convenience init(frame: CGRect, handler: @escaping ESRefreshHandler) {
+    
+//    public func setAppStyle(TintColor color: UIColor, Font font: UIFont){
+//        titleLabel.font = font
+//        titleLabel.textColor = color
+//    }
+    
+    public convenience init(frame: CGRect, color: UIColor?, font: UIFont?, handler: @escaping ESRefreshHandler) {
         self.init(frame: frame)
         self.handler = handler
-        self.animator = ESRefreshHeaderAnimator.init()
+        let animator = ESRefreshHeaderAnimator.init()
+        animator.setAppStyle(TintColor: color, Font: font)
+        self.animator = animator
     }
     
     open override func didMoveToSuperview() {
