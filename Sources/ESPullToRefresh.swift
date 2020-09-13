@@ -47,9 +47,9 @@ public extension UIScrollView {
 public extension ES where Base: UIScrollView {
     /// Add pull-to-refresh
     @discardableResult
-    func addPullToRefresh(handler: @escaping ESRefreshHandler) -> ESRefreshHeaderView {
+    func addPullToRefresh(TintColor color: UIColor?, Font font: UIFont?, handler: @escaping ESRefreshHandler) -> ESRefreshHeaderView {
         removeRefreshHeader()
-        let header = ESRefreshHeaderView.init(frame: .zero, color: fontColor, font: font, handler: handler)
+        let header = ESRefreshHeaderView.init(frame: .zero, color: color, font: font, handler: handler)
         //(frame: CGRect.zero, handler: handler)
         let headerH = header.animator.executeIncremental
         header.frame = CGRect.init(x: 0.0, y: -headerH /* - contentInset.top */, width: self.base.bounds.size.width, height: headerH)
@@ -59,9 +59,9 @@ public extension ES where Base: UIScrollView {
     }
     
     @discardableResult
-    func addPullToRefresh(animator: ESRefreshProtocol & ESRefreshAnimatorProtocol, handler: @escaping ESRefreshHandler) -> ESRefreshHeaderView {
+    func addPullToRefresh(TintColor color: UIColor?, Font font: UIFont?, animator: ESRefreshProtocol & ESRefreshAnimatorProtocol, handler: @escaping ESRefreshHandler) -> ESRefreshHeaderView {
         removeRefreshHeader()
-        let header = ESRefreshHeaderView(frame: CGRect.zero, handler: handler, animator: animator)
+        let header = ESRefreshHeaderView(frame: CGRect.zero, color: color, font: font, handler: handler)
         let headerH = animator.executeIncremental
         header.frame = CGRect.init(x: 0.0, y: -headerH /* - contentInset.top */, width: self.base.bounds.size.width, height: headerH)
         self.base.addSubview(header)
@@ -71,9 +71,9 @@ public extension ES where Base: UIScrollView {
     
     /// Add infinite-scrolling
     @discardableResult
-    func addInfiniteScrolling(handler: @escaping ESRefreshHandler) -> ESRefreshFooterView {
+    func addInfiniteScrolling(TintColor color: UIColor?, Font font: UIFont?, handler: @escaping ESRefreshHandler) -> ESRefreshFooterView {
         removeRefreshFooter()
-        let footer = ESRefreshFooterView(frame: CGRect.zero, handler: handler)
+        let footer = ESRefreshFooterView.init(TintColor: color, Font: font, frame: .zero, handler: handler)
         let footerH = footer.animator.executeIncremental
         footer.frame = CGRect.init(x: 0.0, y: self.base.contentSize.height + self.base.contentInset.bottom, width: self.base.bounds.size.width, height: footerH)
         self.base.addSubview(footer)
@@ -82,9 +82,10 @@ public extension ES where Base: UIScrollView {
     }
 
     @discardableResult
-    func addInfiniteScrolling(animator: ESRefreshProtocol & ESRefreshAnimatorProtocol, handler: @escaping ESRefreshHandler) -> ESRefreshFooterView {
+    func addInfiniteScrolling(TintColor color: UIColor?, Font font: UIFont?, animator: ESRefreshProtocol & ESRefreshAnimatorProtocol, handler: @escaping ESRefreshHandler) -> ESRefreshFooterView {
         removeRefreshFooter()
-        let footer = ESRefreshFooterView(frame: CGRect.zero, handler: handler, animator: animator)
+        let footer = ESRefreshFooterView.init(TintColor: color, Font: font, frame: .zero, handler: handler)
+            //frame: CGRect.zero handler: handler)
         let footerH = footer.animator.executeIncremental
         footer.frame = CGRect.init(x: 0.0, y: self.base.contentSize.height + self.base.contentInset.bottom, width: self.base.bounds.size.width, height: footerH)
         self.base.footer = footer
@@ -119,11 +120,6 @@ public extension ES where Base: UIScrollView {
                 base?.header?.startRefreshing(isAuto: true)
             }
         }
-    }
-    
-    mutating func setAppStyle(TintColor color: UIColor?, Font font: UIFont?){
-        self.font = font
-        self.fontColor = color
     }
     
     /// Stop pull to refresh
@@ -207,12 +203,6 @@ open class ESRefreshHeaderView: ESRefreshComponent {
 
     open var lastRefreshTimestamp: TimeInterval?
     open var refreshIdentifier: String?
-    
-    
-//    public func setAppStyle(TintColor color: UIColor, Font font: UIFont){
-//        titleLabel.font = font
-//        titleLabel.textColor = color
-//    }
     
     public convenience init(frame: CGRect, color: UIColor?, font: UIFont?, handler: @escaping ESRefreshHandler) {
         self.init(frame: frame)
@@ -377,10 +367,12 @@ open class ESRefreshFooterView: ESRefreshComponent {
         }
     }
     
-    public convenience init(frame: CGRect, handler: @escaping ESRefreshHandler) {
+    public convenience init(TintColor color: UIColor?, Font font: UIFont?, frame: CGRect, handler: @escaping ESRefreshHandler) {
         self.init(frame: frame)
         self.handler = handler
-        self.animator = ESRefreshFooterAnimator.init()
+        let animator = ESRefreshFooterAnimator.init()
+        animator.setAppStyle(TintColor: color, Font: font)
+        self.animator = animator
     }
     
     /**

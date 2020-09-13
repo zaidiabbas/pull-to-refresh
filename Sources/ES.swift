@@ -25,8 +25,6 @@ extension ESExtensionsProvider {
 public struct ES<Base> {
     public let base: Base
     
-    var fontColor: UIColor?
-    var font: UIFont?
     // Construct a proxy.
     //
     // - parameters:

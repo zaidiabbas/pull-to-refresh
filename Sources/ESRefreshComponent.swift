@@ -38,6 +38,10 @@ open class ESRefreshComponent: UIView {
     /// @param animator Animated view refresh controls, custom must comply with the following two protocol
     open var animator: (ESRefreshProtocol & ESRefreshAnimatorProtocol)!
     
+    open var color: UIColor?
+    
+    open var font: UIFont?
+    
     /// @param refreshing or not
     fileprivate var _isRefreshing = false
     open var isRefreshing: Bool {
@@ -63,16 +67,20 @@ open class ESRefreshComponent: UIView {
         autoresizingMask = [.flexibleLeftMargin, .flexibleWidth, .flexibleRightMargin]
     }
     
-    public convenience init(frame: CGRect, handler: @escaping ESRefreshHandler) {
+    public convenience init(TintColor color: UIColor?, Font font: UIFont?, frame: CGRect, handler: @escaping ESRefreshHandler) {
         self.init(frame: frame)
         self.handler = handler
         self.animator = ESRefreshAnimator.init()
+        self.font = font
+        self.color = color
     }
     
-    public convenience init(frame: CGRect, handler: @escaping ESRefreshHandler, animator: ESRefreshProtocol & ESRefreshAnimatorProtocol) {
+    public convenience init(TintColor color: UIColor?, Font font: UIFont?, frame: CGRect, handler: @escaping ESRefreshHandler, animator: ESRefreshProtocol & ESRefreshAnimatorProtocol) {
         self.init(frame: frame)
         self.handler = handler
         self.animator = animator
+        self.font = font
+        self.color = color
     }
     
     public required init?(coder aDecoder: NSCoder) {

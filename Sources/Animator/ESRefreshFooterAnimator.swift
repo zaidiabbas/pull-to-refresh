@@ -69,6 +69,11 @@ open class ESRefreshFooterAnimator: UIView, ESRefreshProtocol, ESRefreshAnimator
         indicatorView.isHidden = false
     }
     
+    func setAppStyle(TintColor color: UIColor?, Font font: UIFont?){
+         titleLabel.font = font ?? UIFont.systemFont(ofSize: 14.0)
+         titleLabel.textColor = color ?? UIColor.init(white: 0.625, alpha: 1.0)
+     }
+    
     open func refreshAnimationEnd(view: ESRefreshComponent) {
         indicatorView.stopAnimating()
         titleLabel.text = loadingMoreDescription
