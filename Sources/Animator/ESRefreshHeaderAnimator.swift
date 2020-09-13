@@ -45,6 +45,25 @@ open class ESRefreshHeaderAnimator: UIView, ESRefreshProtocol, ESRefreshAnimator
     open var executeIncremental: CGFloat = 60.0
     open var state: ESRefreshViewState = .pullToRefresh
 
+    open var tintColor: UIColor!{
+        set{
+            tintColor = tintColor
+        }
+        get{
+            return tintColor
+        }
+    }
+    
+    open var font: UIFont{
+        set{
+            font = font
+        }
+        get{
+            return font
+        }
+    }
+    
+    
     fileprivate let imageView: UIImageView = {
         let imageView = UIImageView.init()
         let frameworkBundle = Bundle(for: ESRefreshAnimator.self)
@@ -62,8 +81,8 @@ open class ESRefreshHeaderAnimator: UIView, ESRefreshProtocol, ESRefreshAnimator
     
     fileprivate let titleLabel: UILabel = {
         let label = UILabel.init(frame: CGRect.zero)
-        label.font = UIFont.systemFont(ofSize: 14.0)
-        label.textColor = UIColor.init(white: 0.625, alpha: 1.0)
+        label.font = font
+        label.textColor = tintColor
         label.textAlignment = .left
         return label
     }()
@@ -148,6 +167,8 @@ open class ESRefreshHeaderAnimator: UIView, ESRefreshProtocol, ESRefreshAnimator
         
         UIView.performWithoutAnimation {
             titleLabel.sizeToFit()
+            indicatorView.tintColor = tintColor
+            titleLabel.textColor = tintColor
             titleLabel.center = CGPoint.init(x: w / 2.0, y: h / 2.0)
             indicatorView.center = CGPoint.init(x: titleLabel.frame.origin.x - 16.0, y: h / 2.0)
             imageView.frame = CGRect.init(x: titleLabel.frame.origin.x - 28.0, y: (h - 18.0) / 2.0, width: 18.0, height: 18.0)
