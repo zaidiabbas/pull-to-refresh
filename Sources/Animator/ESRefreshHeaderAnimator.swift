@@ -78,7 +78,7 @@ open class ESRefreshHeaderAnimator: UIView, ESRefreshProtocol, ESRefreshAnimator
         titleLabel.font = font ?? UIFont.systemFont(ofSize: 14.0)
         titleLabel.textColor = color ?? UIColor.init(white: 0.625, alpha: 1.0)
         imageView.tintColor = color ?? UIColor.init(white: 0.625, alpha: 1.0)
-        indicatorView.tintColor = color ?? UIColor.init(white: 0.625, alpha: 1.0)
+        indicatorView.color = color ?? UIColor.init(white: 0.625, alpha: 1.0)
     }
     
     public override init(frame: CGRect) {
