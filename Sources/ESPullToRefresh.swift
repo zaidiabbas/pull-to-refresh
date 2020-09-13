@@ -121,6 +121,11 @@ public extension ES where Base: UIScrollView {
         }
     }
     
+    func setAppStyle(TintColor color: UIColor?, Font font: UIFont?){
+        self.font = font
+        self.fontColor = color
+    }
+    
     /// Stop pull to refresh
     func stopPullToRefresh(ignoreDate: Bool = false, ignoreFooter: Bool = false) {
         self.base.header?.stopRefreshing()
