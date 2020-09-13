@@ -74,6 +74,11 @@ open class ESRefreshHeaderAnimator: UIView, ESRefreshProtocol, ESRefreshAnimator
         return indicatorView
     }()
     
+    public func setAppStyle(TintColor color: UIColor, Font font: UIFont){
+        titleLabel.font = font
+        titleLabel.textColor = color
+    }
+    
     public override init(frame: CGRect) {
         super.init(frame: frame)
         titleLabel.text = pullToRefreshDescription
