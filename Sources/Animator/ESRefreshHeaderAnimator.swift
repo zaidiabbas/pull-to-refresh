@@ -49,13 +49,13 @@ open class ESRefreshHeaderAnimator: UIView, ESRefreshProtocol, ESRefreshAnimator
         let imageView = UIImageView.init()
         let frameworkBundle = Bundle(for: ESRefreshAnimator.self)
         if /* CocoaPods static */ let path = frameworkBundle.path(forResource: "ESPullToRefresh", ofType: "bundle"),let bundle = Bundle(path: path) {
-            imageView.image = UIImage(named: "icon_pull_to_refresh_arrow", in: bundle, compatibleWith: nil)
+            imageView.image = UIImage(named: "icon_pull_to_refresh_arrow", in: bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
         }else if /* Carthage */ let bundle = Bundle.init(identifier: "com.eggswift.ESPullToRefresh") {
-            imageView.image = UIImage(named: "icon_pull_to_refresh_arrow", in: bundle, compatibleWith: nil)
+            imageView.image = UIImage(named: "icon_pull_to_refresh_arrow", in: bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
         } else if /* CocoaPods */ let bundle = Bundle.init(identifier: "org.cocoapods.ESPullToRefresh") {
-            imageView.image = UIImage(named: "ESPullToRefresh.bundle/icon_pull_to_refresh_arrow", in: bundle, compatibleWith: nil)
+            imageView.image = UIImage(named: "ESPullToRefresh.bundle/icon_pull_to_refresh_arrow", in: bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
         } else /* Manual */ {
-            imageView.image = UIImage(named: "icon_pull_to_refresh_arrow")
+            imageView.image = UIImage(named: "icon_pull_to_refresh_arrow")?.withRenderingMode(.alwaysTemplate)
         }
         return imageView
     }()
@@ -77,6 +77,7 @@ open class ESRefreshHeaderAnimator: UIView, ESRefreshProtocol, ESRefreshAnimator
     func setAppStyle(TintColor color: UIColor?, Font font: UIFont?){
         titleLabel.font = font ?? UIFont.systemFont(ofSize: 14.0)
         titleLabel.textColor = color ?? UIColor.init(white: 0.625, alpha: 1.0)
+        imageView.tintColor = color ?? UIColor.init(white: 0.625, alpha: 1.0)
     }
     
     public override init(frame: CGRect) {
